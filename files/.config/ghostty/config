@@ -53,9 +53,9 @@ clipboard-write = allow
 copy-on-select = true
 confirm-close-surface = false
 quit-after-last-window-closed = true
-
+shell-integration = zsh
 # Appearance
-background-opacity = 0.8
+background-opacity = 0.92
 background-blur = 20
 theme = Apple System Colors
 bold-is-bright = true
@@ -67,8 +67,8 @@ font-family-italic = MesloLGS NF, Regular Italic
 font-family-bold-italic = MesloLGS NF, Bold Italic
 
 # New environment
-keybind = ctrl+x=new_split:down
-keybind = ctrl+z=new_split:right
+keybind = ctrl+z=new_split:down
+keybind = ctrl+x=new_split:right
 
 # Movement
 keybind = page_up=scroll_page_up
