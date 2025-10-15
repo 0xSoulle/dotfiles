@@ -2,10 +2,10 @@
 #
 # Dotmanager
 #
-# Author: Goncalo Sousa
+# Author: souLLe
 # License: MIT
 # Version: 0.1
-# GitHub: https://github.com/diutsu/dotmanager
+# GitHub: https://github.com/0xsoulle/dotfiles
 # License: This project is licensed under the MIT License - see the LICENSE file for details.
 #
 # Dotmanager is a simple script for managing your dotfiles, allowing you to install, update, add,
