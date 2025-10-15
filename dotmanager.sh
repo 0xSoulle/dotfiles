@@ -12,7 +12,7 @@
 # check status, or view differences with ease.
 #
 # Usage:
-#   ./dotmanager.sh [-iua:hsD:] [file]
+#   ./dotmanager.sh [-i|-u|-s|-h|-a <file>|-D <file>]
 #
 # Options:
 #   -i: Install mode
@@ -27,7 +27,7 @@ src_dir="${DOTFILES:-.}/files"
 dest_dir="$HOME"
 
 print_help() {
-    echo "Usage: $0 [-iua:hsd:] [file]"
+    echo "Usage: $0 [-i|-u|-s|-h|-a <file>|-D <file>]"
     echo "Options:"
     echo "  -i: Install mode"
     echo "  -u: Update mode"
@@ -87,7 +87,6 @@ fi
 excluded_files=("dotmanager.sh" "README.md" "LICENSE" ".git")
 
 # Find managed files excluding excluded files
-echo $src_dir
 managed_files=($(find "$src_dir" -type f ! -name "${excluded_files[1]}" ! -name "${excluded_files[2]}" ! -name "${excluded_files[3]}" ! -name "${excluded_files[4]}"))
 
 if [[ "$mode" == "add" ]]; then
@@ -109,15 +108,19 @@ if [[ "$mode" == "add" ]]; then
         exit 1
     fi
 
+    # Destination path inside the managed files folder
+    dest_path="$src_dir/$rel_path"
+    mkdir -p "$(dirname "$dest_path")"
+
     # Check if the file already exists in the files folder
     if [ -e "$dest_path" ]; then
         # Update the existing file
-        cp "$new_file" "$dest_path"
-        echo "Updated $dest_path with $new_file"
+        cp -f "$new_file" "$dest_path"
+        echo "Updated: $rel_path"
     else
         # Copy the new file to the files folder
-        cp "$new_file" "$dest_path"
-        echo "Added $new_file to $dest_path"
+        cp -f "$new_file" "$dest_path"
+        echo "Added: $rel_path"
     fi
 elif [[ "$mode" == "status" ]]; then
     print_status
@@ -154,23 +157,26 @@ for file in "${managed_files[@]}"; do
 
     if [[ "$mode" == "install" ]]; then
 	    if [ -e "$dest_file" ]; then
-            if diff -r "$file" "$dest_file" > /dev/null; then
-                echo "No change between $file and $dest_file"
+            if cmp -s "$file" "$dest_file"; then
+                echo "Up to date: $file_name"
             else
-                cp -r "$file" "$dest_dir"
-                echo "Updated $file with $dest_file"
+                mkdir -p "$(dirname "$dest_file")"
+                cp -f "$file" "$dest_file"
+                echo "Updated: $file_name"
             fi
         else
-            cp -r "$file" "$dest_dir"
-            echo "Created: $dest_file"
+            mkdir -p "$(dirname "$dest_file")"
+            cp -f "$file" "$dest_file"
+            echo "Installed: $file_name"
         fi
     elif [[ "$mode" == "update" ]]; then
         if [ -e "$dest_file" ]; then
-            if diff -r "$file" "$dest_file" > /dev/null; then
-                echo "No change between $file and $dest_file"
+            if cmp -s "$file" "$dest_file"; then
+                echo "Up to date: $file_name"
             else
-                cp -r "$dest_file" "$file"
-                echo "Updated: $file with $dest_file"
+                mkdir -p "$(dirname "$file")"
+                cp -f "$dest_file" "$file"
+                echo "Synced from local: $file_name"
             fi
         else
             echo "File not found in local filesystem: $dest_file. Skipping..."
