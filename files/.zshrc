@@ -21,7 +21,10 @@ alias vi="vim"
 alias pacman="sudo pacman"
 alias pacin="sudo pacman -S"
 alias upgrade="sudo pacman -Syu; paru"
+
+alias spotify="spotify-launcher"
 alias code="cursor"
+
 alias j="z"
 
 # KEYBINDINGS
