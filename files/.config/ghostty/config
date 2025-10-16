@@ -55,7 +55,7 @@ confirm-close-surface = false
 quit-after-last-window-closed = true
 shell-integration = zsh
 # Appearance
-background-opacity = 0.92
+background-opacity = 0.8
 background-blur = 20
 theme = Apple System Colors
 bold-is-bright = true
