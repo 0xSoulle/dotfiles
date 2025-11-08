@@ -27,6 +27,8 @@ alias code="cursor"
 
 alias j="z"
 
+alias cdl = "cd && ls"
+
 # KEYBINDINGS
 # fix for special keybind
 # create a zkbd compatible bash
