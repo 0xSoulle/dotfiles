@@ -1,0 +1,162 @@
+* {
+  font-size: 16px;
+  min-height: 0;
+  border-radius: 1rem;
+  padding: 0.1rem;
+}
+
+window#waybar {
+  background: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
+  transition: margin 0.2s ease-in-out;
+}
+
+/* Slide-in via margins with a 3px reveal edge */
+window#waybar.top {
+  margin-top: -21px; /* 24px height - 3px reveal */
+}
+window#waybar.top:hover {
+  margin-top: 0;
+}
+window#waybar.bottom {
+  margin-bottom: -38px; /* 41px height - 3px reveal */
+}
+window#waybar.bottom:hover {
+  margin-bottom: 0;
+}
+
+tooltip {
+  background: #ffffff;
+}
+tooltip label {
+  color: black;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  background: transparent;
+  color: white;
+  border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+  background: #64727d;
+  border-bottom: 3px solid white;
+}
+
+#mode,
+#clock,
+#battery {
+  padding: 0 10px;
+}
+
+#mode {
+  background: #64727d;
+  border-bottom: 3px solid black;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
+  margin: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: #ffffff;
+}
+
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
+}
+
+#clock {
+  font-size: 14px;
+}
+
+#battery icon {
+  color: red;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #000000;
+  background-color: #26a65b;
+}
+
+@keyframes blink {
+  to {
+    background-color: #000000;
+    color: #ffffff;
+  }
+}
+
+#battery.warning:not(.charging) {
+  background-color: #f53c3c;
+  color: #000000;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.critical:not(.charging) {
+  background-color: #f53c3c;
+  color: #000000;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+label:focus {
+  background-color: #ffffff;
+}
+
+#network.disconnected {
+  background-color: #f53c3c;
+}
+
+#temperature.critical {
+  background-color: #eb4d4b;
+}
+
+#idle_inhibitor.activated {
+  background-color: #ecf0f1;
+  color: #2d3436;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #eb4d4b;
+}
+
+#custom-os_button {
+  font-size: 32px;
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+#custom-os_button:hover {
+  background: black;
+  color: white;
+}

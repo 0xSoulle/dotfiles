@@ -18,21 +18,28 @@ bindkey -e
 
 # ALIASES
 alias vi="vim"
-alias pacman="sudo pacman"
+alias vim="nvim"
+alias view='fzf --preview="bat --color=always {}"'
+alias edit='nvim $(fzf --preview="bat --color=always {}")'
 alias pacin="sudo pacman -S"
-alias upgrade="sudo pacman -Syu; paru"
+alias pacout="sudo pacman -R"
+alias update="sudo pacman -Syu; paru"
 
 alias spotify="spotify-launcher"
-alias code="cursor"
 
 alias j="z"
 
 cd() {
-  builtin cd "$@" && ls -a
+	if [ $# -eq 0 ]; then
+		builtin cd ~
+	else 
+		builtin cd "$1" && ls
+	fi
 }
 
-
 # KEYBINDINGS
+
+
 # fix for special keybind
 # create a zkbd compatible bash
 typeset -g -A key
@@ -93,18 +100,18 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # PLUGINS
 plugins=(
 	z.lua
-        fzf-tab
         zsh-autosuggestions
-        fzf
-        docker
-	spring
         zsh-syntax-highlighting
-        kubectl
+	fzf-tab
+	fzf-zsh-plugin
       )
 source /usr/share/zsh/plugins/z.lua/z.lua.plugin.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+source <(fzf --zsh)
+source ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.zsh
 
+
+# AUTO RUN
 fastfetch
-

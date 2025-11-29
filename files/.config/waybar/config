@@ -1,0 +1,183 @@
+[
+  {
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "spacing": 5,
+    "modules-left": [
+      "custom/launcher",
+      "hyprland/window",
+      "custom/texttwo"
+    ],
+    "modules-center": [
+      "hyprland/workspaces"
+    ],
+    "modules-right": [
+      "mpd",
+      "cpu",
+      "memory",
+      "network",
+      "pulseaudio",
+      "tray",
+      "clock"
+    ],
+    "hyprland/window": {
+      "format": "{class}",
+      "max-length": 20,
+      "rewrite": {
+        "^(?!.*\\S).*": "TURRIS"
+      }
+    },
+    "custom/launcher": {
+      "format": "🔍",
+      "on-click": "wofi --show drun",
+      "tooltip": false
+    },
+    "custom/texttwo": {
+      "exec": "echo 'Files'",
+      "interval": 60,
+      "return-type": "plain",
+      "on-click": "nautilus"
+    },
+    "hyprland/workspaces": {
+      "format": "{icon}",
+      "on-click": "activate",
+      "sort-by-number": true,
+      "format-icons": {
+        "active": "●",
+        "default": "○",
+        "urgent": "◉"
+      }
+    },
+    "hyprland/mode": {
+      "format": "<span style=\"italic\">{}</span>"
+    },
+    "hyprland/scratchpad": {
+      "format": "{icon} {count}",
+      "show-empty": false,
+      "format-icons": [
+        "",
+        ""
+      ],
+      "tooltip": true,
+      "tooltip-format": "{app}: {title}"
+    },
+    "mpd": {
+      "format": "  {title} - {artist} {stateIcon} [{elapsedTime:%M:%S}/{totalTime:%M:%S}] {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}[{songPosition}/{queueLength}] [{volume}%]",
+      "format-disconnected": " Disconnected",
+      "format-stopped": " {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
+      "unknown-tag": "N/A",
+      "interval": 2,
+      "consume-icons": {
+        "on": " "
+      },
+      "random-icons": {
+        "on": " "
+      },
+      "repeat-icons": {
+        "on": " "
+      },
+      "single-icons": {
+        "on": "1 "
+      },
+      "state-icons": {
+        "paused": "",
+        "playing": ""
+      },
+      "tooltip-format": "MPD (connected)",
+      "tooltip-format-disconnected": "MPD (disconnected)",
+      "on-click": "mpc toggle",
+      "on-click-right": "foot -a ncmpcpp ncmpcpp",
+      "on-scroll-up": "mpc volume +2",
+      "on-scroll-down": "mpc volume -2"
+    },
+    "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "",
+        "deactivated": ""
+      }
+    },
+    "tray": {
+      "spacing": 10
+    },
+    "clock": {
+      "format": "{:%d/%B %H:%M}",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "cpu": {
+      "format": "  {usage}%"
+    },
+    "memory": {
+      "format": " {}%"
+    },
+    "backlight": {
+      "format": "{icon} {percent}%",
+      "format-icons": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "network": {
+      "format-wifi": "({signalStrength}%) ",
+      "format-ethernet": " {ifname}",
+      "tooltip-format": " {ifname} via {gwaddr}",
+      "format-linked": " {ifname} (No IP)",
+      "format-disconnected": "Disconnected ⚠ {ifname}",
+      "format-alt": " {ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+      "scroll-step": 5,
+      "format": "{icon} {volume}%",
+      "format-muted": "",
+      "format-bluetooth": "{icon} {volume}%",
+      "format-bluetooth-muted": " {icon}",
+      "format-icons": {
+        "default": [
+          "",
+          "",
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "layer": "top",
+    "position": "bottom",
+    "height": 41,
+    "width": 2,
+    "modules-left": [
+      "custom/os_button"
+    ],
+    "modules-center": [
+      "hyprland/mode",
+      "wlr/taskbar"
+    ],
+    "margin": "4",
+    "spacing": "5",
+    "hyprland/window": {
+      "max-length": 50
+    },
+    "custom/os_button": {
+      "format": "🔍",
+      "on-click": "wofi --show drun",
+      "tooltip": false
+    },
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 36,
+      "spacing": 3,
+      "on-click-middle": "close",
+      "tooltip-format": "{title}",
+      "ignore-list": [],
+      "on-click": "activate"
+    }
+  }
+]
