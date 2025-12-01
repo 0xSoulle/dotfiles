@@ -1,5 +1,3 @@
-
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -17,16 +15,14 @@ bindkey -e
 # End of lines configured by zsh-newuser-install
 
 # ALIASES
-alias vi="vim"
-alias vim="nvim"
-alias view='fzf --preview="bat --color=always {}"'
-alias edit='nvim $(fzf --preview="bat --color=always {}")'
+alias view='fzf --style full --preview="bat --color=always {}"'
+alias edit="fzf --style full --multi --bind 'enter:become(nvim {+})'"
 alias pacin="sudo pacman -S"
 alias pacout="sudo pacman -R"
 alias update="sudo pacman -Syu; paru"
-
+alias la="ls -a"
+alias cat="bat"
 alias spotify="spotify-launcher"
-
 alias j="z"
 
 cd() {
@@ -88,30 +84,31 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# THEME
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
+. "$HOME/.local/bin/env"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-. "$HOME/.local/bin/env"
-
 # PLUGINS
+
 plugins=(
-	z.lua
-        zsh-autosuggestions
-        zsh-syntax-highlighting
-	fzf-tab
-	fzf-zsh-plugin
+	docker
+	git
+	git-commit
+        colorize
+	zsh-interactive-cd
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	z
+	fzf
       )
-source /usr/share/zsh/plugins/z.lua/z.lua.plugin.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source <(fzf --zsh)
-source ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-
+export ZSH=/home/soulle/.oh-my-zsh
+source $ZSH/oh-my-zsh.sh
 # AUTO RUN
 fastfetch
+
+
+
+
