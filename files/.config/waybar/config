@@ -1,38 +1,36 @@
 // -*- mode: jsonc -*-
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 35, // Waybar height (to be removed for auto height)
+    //"width": 1280, // Waybar width
+    "spacing": 5, // Gaps between modules (5px)
+
     // Choose the order of the modules
     "modules-left": [
         "custom/launcher",
         "hyprland/window"
     ],
+
     "modules-center": [
         "hyprland/workspaces",
         "custom/media"
 
     ],
+
     "modules-right": [
         "mpd",
-        "idle_inhibitor",
         "pulseaudio",
-        "network",
-        "power-profiles-daemon",
         "cpu",
         "memory",
         "temperature",
-        "backlight",
-        "keyboard-state",
-        "sway/language",
         "battery",
-        "battery#bat2",
-        "clock",
+        "network",
         "tray",
+        "clock",
         "custom/power"
     ],
+
     "hyprland/window": {
       "format": "{class}",
       "max-length": 20,
@@ -40,11 +38,13 @@
         "^(?!.*\\S).*": "TURRIS"
       }
     },
+
     "custom/launcher": {
       "format": "🔍",
       "on-click": "hyprlauncher",
       "tooltip": false
     },
+
     "hyprland/workspaces": {
       "format": "{icon}",
       "on-click": "activate",
@@ -55,29 +55,12 @@
         "urgent": "◉"
       }
     },
+
     // Modules configuration
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
-    },
     "hyprland/mode": {
       "format": "<span style=\"italic\">{}</span>"
     },
-    "hyprland/scratchpad": {
-      "format": "{icon} {count}",
-      "show-empty": false,
-      "format-icons": [
-        "",
-        ""
-      ],
-      "tooltip": true,
-      "tooltip-format": "{app}: {title}"
-    },
+
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
         "format-disconnected": "Disconnected ",
@@ -104,33 +87,31 @@
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)"
     },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
+
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10,
+        "icons": {
+            "blueman": "bluetooth",
+            "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
         }
     },
-    "tray": {
-        // "icon-size": 21,
-        "spacing": 10,
-        // "icons": {
-        //   "blueman": "bluetooth",
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-        // }
-    },
+
     "clock": {
         // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%d-%m-%Y}"
     },
+
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false
     },
+
     "memory": {
         "format": "{}% "
     },
+
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
@@ -139,11 +120,7 @@
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
     },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
-    },
+
     "battery": {
         "states": {
             "good": 95,
@@ -159,37 +136,23 @@
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
-    "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
-      }
-    },
+
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{essid} ({signalStrength}%)",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
+
     "pulseaudio": {
         "scroll-step": 3, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -214,9 +177,9 @@
     },
     "custom/power": {
         "format" : "⏻ ",
-		"tooltip": false,
+		"tooltip": true,
 		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+		"menu-file": "$HOME/.config/waybar/power_menu.xml", 
 		"menu-actions": {
 			"shutdown": "shutdown",
 			"reboot": "reboot",
