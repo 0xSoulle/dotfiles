@@ -5,21 +5,16 @@
     "height": 35, // Waybar height (to be removed for auto height)
     //"width": 1280, // Waybar width
     "spacing": 5, // Gaps between modules (5px)
-
     // Choose the order of the modules
     "modules-left": [
         "custom/launcher",
         "hyprland/window"
     ],
-
     "modules-center": [
         "hyprland/workspaces",
         "custom/media"
-
     ],
-
     "modules-right": [
-        "mpd",
         "pulseaudio",
         "cpu",
         "memory",
@@ -30,62 +25,40 @@
         "clock",
         "custom/power"
     ],
-
     "hyprland/window": {
-      "format": "{class}",
-      "max-length": 20,
-      "rewrite": {
-        "^(?!.*\\S).*": "TURRIS"
-      }
+        "icon": false,
+        "icon-size": 24,
+        "format": "{title}",
+        "max-length": 20,
+        "rewrite": {
+            "^(?!.*\\S).*": "TURRIS"
+        },
+        "separate-outputs": true
     },
-
     "custom/launcher": {
-      "format": "🔍",
-      "on-click": "hyprlauncher",
-      "tooltip": false
+        "format": "🔍",
+        "on-click": "hyprlauncher",
+        "tooltip": false
     },
-
     "hyprland/workspaces": {
-      "format": "{icon}",
-      "on-click": "activate",
-      "sort-by-number": true,
-      "format-icons": {
-        "active": "●",
-        "default": "○",
-        "urgent": "◉"
-      }
-    },
+        "format": "{icon}",
+        "on-click": "activate",
+        "sort-by-number": true,
+        "format-icons": {
+            "active": "●",
+            "default": "○",
+            "urgent": "◉",
+            "terminal": "",
+            "firefox": "",
+            "spotify": ""
+        },
+        "rewrite": {
 
+        }
+    },
     // Modules configuration
     "hyprland/mode": {
-      "format": "<span style=\"italic\">{}</span>"
-    },
-
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 5,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
+        "format": "<span style=\"italic\">{}</span>"
     },
 
     "tray": {
@@ -96,31 +69,30 @@
             "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
         }
     },
-
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%d-%m-%Y}"
     },
-
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false
     },
-
     "memory": {
         "format": "{}% "
     },
-
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": [
+            "",
+            "",
+            ""
+        ]
     },
-
     "battery": {
         "states": {
             "good": 95,
@@ -134,9 +106,14 @@
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
-
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%)",
@@ -146,13 +123,12 @@
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
-
     "pulseaudio": {
         "scroll-step": 3, // %, can be a float
         "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": "󰖁",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -160,7 +136,11 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": [
+                "",
+                "",
+                ""
+            ]
         },
         "on-click": "pavucontrol"
     },
@@ -176,15 +156,14 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/power": {
-        "format" : "⏻ ",
-		"tooltip": true,
-		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", 
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
-		}
+        "format": "⏻ ",
+        "tooltip": true,
+        "menu": "on-click",
+        "menu-file": "$HOME/.config/waybar/power_menu.xml",
+        "menu-actions": {
+            "shutdown": "shutdown now",
+            "reboot": "reboot now",
+            "suspend": "systemctl suspend"
+        }
     }
 }
